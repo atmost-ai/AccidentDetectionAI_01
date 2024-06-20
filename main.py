@@ -2,8 +2,9 @@ import csv
 import uuid
 from datetime import datetime, timedelta
 import random
+import os
 
-LONDON_COORDINATES = {"latitude": 51.5074, "longitude": -0.1278}
+LONDON_COORDINATES = {"latitude": 9.939093, "longitude": 76.270523}
 BIRMINGHAM_COORDINATES = {"latitude": 52.4862, "longitude": -1.8904}
 LATITUDE_INCREMENT = (BIRMINGHAM_COORDINATES['latitude'] - LONDON_COORDINATES['latitude']) / 100
 LONGITUDE_INCREMENT = (BIRMINGHAM_COORDINATES['longitude'] - LONDON_COORDINATES['longitude']) / 100
@@ -11,7 +12,7 @@ LONGITUDE_INCREMENT = (BIRMINGHAM_COORDINATES['longitude'] - LONDON_COORDINATES[
 start_time = datetime.now()
 start_location = LONDON_COORDINATES.copy()
 
-vehicle_ids = [f'Vehicle-{i}' for i in range(1000)]
+vehicle_ids = [f'KL-07-{i}' for i in range(1000)]
 
 def get_next_time():
     global start_time
@@ -71,7 +72,14 @@ def generate_gps_data(vehicle_id, timestamp):
     }
 
 def write_csv(file_name, fieldnames, data):
-    with open(file_name, 'w', newline='') as csvfile:
+    # Ensure the 'data' directory exists
+    os.makedirs('data', exist_ok=True)
+    
+    # Create the full path for the CSV file
+    full_path = os.path.join('data', file_name)
+    
+    # Write the data to the CSV file
+    with open(full_path, 'w', newline='') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for row in data:
