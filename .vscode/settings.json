@@ -1,3 +1,4 @@
 {
-    "workbench.iconTheme": "bearded-icons"
+    "workbench.iconTheme": "bearded-icons",
+    "python.analysis.typeCheckingMode": "basic"
 }
