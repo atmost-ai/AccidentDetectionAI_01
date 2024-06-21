@@ -50,13 +50,9 @@ The purpose of this project is to generate synthetic data representing the movem
     source venv/bin/activate  # On Windows use `venv\Scripts\activate`
     ```
 
-3. Install the required packages:
-    ```bash
-    pip install -r requirements.txt
-    ```
 
 ## Usage
 
 To generate the data, simply run the `data_generation.py` script:
 ```bash
-python data_generation.py
+python datagen.py
