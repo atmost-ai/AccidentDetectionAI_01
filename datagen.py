@@ -137,6 +137,7 @@ def generate_gps_data(vehicle_id, timestamp, is_accident=False):
         'severity': severity
     }
 
+
 def write_csv(file_name, fieldnames, data):
     # Ensure the 'data' directory exists
     os.makedirs('data', exist_ok=True)
