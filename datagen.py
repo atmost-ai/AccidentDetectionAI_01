@@ -109,15 +109,25 @@ def generate_gyroscope_data(vehicle_id, timestamp, is_accident=False):
         'severity': severity
     }
 
+
 def generate_gps_data(vehicle_id, timestamp, is_accident=False):
     location = simulate_vehicle_movement()
     severity = None
     if is_accident:
         severity = determine_severity()
-        latitude_deviation = random.uniform(-0.01, 0.01) if severity == "High" else random.uniform(-0.005, 0.005) if severity == "Medium" else random.uniform(-0.002, 0.002)
-        longitude_deviation = random.uniform(-0.01, 0.01) if severity == "High" else random.uniform(-0.005, 0.005) if severity == "Medium" else random.uniform(-0.002, 0.002)
+        if severity == "High":
+            latitude_deviation = random.uniform(-0.008, 0.008)
+            longitude_deviation = random.uniform(-0.008, 0.008)
+        elif severity == "Medium":
+            latitude_deviation = random.uniform(-0.004, 0.004)
+            longitude_deviation = random.uniform(-0.004, 0.004)
+        else:  # Low severity
+            latitude_deviation = random.uniform(-0.002, 0.002)
+            longitude_deviation = random.uniform(-0.002, 0.002)
+        
         location['latitude'] += latitude_deviation
         location['longitude'] += longitude_deviation
+
     return {
         'id': uuid.uuid4(),
         'vehicle_id': vehicle_id,
